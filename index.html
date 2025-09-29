@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrendTune • Social</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect rx='14' ry='14' width='64' height='64' fill='%23000000'/%3E%3Cpath d='M16 18h32v6H16zM28 28h20v6H28zM24 38h24v6H24z' fill='%23a78bfa'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-eq" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <h1 class="brand-text">TrendTune</h1>
+    </div>
+
+    <nav class="nav">
+      <button class="tab-btn active" data-tab="feed" aria-label="Feed">Feed</button>
+      <button class="tab-btn" data-tab="explore" aria-label="Explorar">Explorar</button>
+      <button class="tab-btn" data-tab="notifications" aria-label="Notificações">Notificações</button>
+      <button class="tab-btn" data-tab="profile" aria-label="Perfil">Perfil</button>
+    </nav>
+
+    <div class="actions">
+      <button id="themeToggle" class="icon-btn" title="Tema claro/escuro">🌓</button>
+      <button id="aboutBtn" class="pill-btn">Sobre</button>
+    </div>
+  </header>
+
+  <!-- Toasts -->
+  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Main -->
+  <main class="container">
+    <!-- FEED -->
+    <section id="feed" class="tab active" aria-labelledby="Feed">
+      <div class="composer card">
+        <div class="composer-head">
+          <img id="composerAvatar" class="avatar" alt="Seu avatar" />
+          <div class="composer-meta">
+            <strong id="composerName">Você</strong>
+            <span>@trenduser</span>
+          </div>
+        </div>
+        <textarea id="postText" rows="3" placeholder="Compartilhe algo que está em alta..."></textarea>
+
+        <div class="composer-actions">
+          <label class="upload">
+            <input id="postImage" type="file" accept="image/*" />
+            📷 Imagem
+          </label>
+          <button id="publishBtn" class="primary">Publicar</button>
+        </div>
+
+        <div id="imagePreview" class="img-preview hidden" role="region" aria-live="polite"></div>
+      </div>
+
+      <div id="feedList" class="feed-list"></div>
+    </section>
+
+    <!-- EXPLORE -->
+    <section id="explore" class="tab" aria-labelledby="Explorar">
+      <div class="card search-card">
+        <input id="searchInput" type="search" placeholder="Pesquisar tendências, tags, pessoas..." />
+        <div class="chips">
+          <button class="chip" data-filter="all">#Tudo</button>
+          <button class="chip" data-filter="music">#Música</button>
+          <button class="chip" data-filter="fashion">#Moda</button>
+          <button class="chip" data-filter="tech">#Tech</button>
+          <button class="chip" data-filter="lifestyle">#Lifestyle</button>
+        </div>
+      </div>
+
+      <div id="exploreGrid" class="grid"></div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section id="notifications" class="tab" aria-labelledby="Notificações">
+      <div id="notifList" class="list"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="tab" aria-labelledby="Perfil">
+      <div class="profile-head card">
+        <div class="profile-row">
+          <img id="profileAvatar" class="avatar xl" alt="Avatar do perfil" />
+          <div class="profile-meta">
+            <h2 id="profileName">Você</h2>
+            <p id="profileHandle" class="muted">@trenduser</p>
+            <p id="profileBio" class="bio">Criador(a) na TrendTune ✨ neon vibes • música • moda • tech</p>
+
+            <div class="stats">
+              <span><strong id="statPosts">0</strong> posts</span>
+              <span><strong id="statFollowers">12</strong> seguidores</span>
+              <span><strong id="statFollowing">34</strong> seguindo</span>
+            </div>
+
+            <div class="profile-actions">
+              <label class="upload sm">
+                <input id="avatarInput" type="file" accept="image/*" />
+                Trocar foto
+              </label>
+              <button id="editBioBtn" class="secondary">Editar bio</button>
+              <button id="resetAvatarBtn" class="secondary" title="Remove a foto do perfil">🔄 Resetar foto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Seus posts</h3>
+      <div id="profilePosts" class="feed-list compact"></div>
+    </section>
+  </main>
+
+  <!-- Modal Sobre -->
+  <dialog id="aboutModal" class="modal">
+    <form method="dialog" class="modal-card">
+      <h3>Sobre o TrendTune</h3>
+      <p>
+        Rede social-conceito criada para a P1: explora tendências com estética
+        <strong>Tech Neon</strong> e <strong>Primavera Brilhante</strong>.  
+        Funções demonstrativas: publicar, curtir, comentar, seguir, explorar, editar perfil, tema neon.
+      </p>
+      <ul class="modal-list">
+        <li>Logo/ícone: equalizador estilizado + "T".</li>
+        <li>Componentes: composer, cards, grid explore, toasts, modal, SPA tabs.</li>
+        <li>Persistência local: <code>localStorage</code>.</li>
+      </ul>
+      <menu class="modal-actions">
+        <button value="close" class="primary">Fechar</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    <small>© 2025 TrendTune • Demo acadêmica</small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
